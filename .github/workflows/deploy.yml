@@ -27,10 +27,11 @@ jobs:
     - name: Minify style.css
       run: csso dist/style.css --output style.min.css
 
-    - name: Clean up all files except style.min.css
+    - name: Move minified CSS to root and clean up
       run: |
+        mv style.min.css ../style.min.css
         rm -rf *
-        mv style.min.css .
+        mv ../style.min.css .
 
     - name: Commit and push only style.min.css to main
       run: |
