@@ -1,19 +1,16 @@
-name: Deploy Minified CSS Only on Merge
+name: Minify CSS
 
 on:
-  pull_request:
+  push:
     branches:
-      - main
-    types:
-      - closed
+      - dev
 
 jobs:
-  deploy-css-to-main:
-    if: github.event.pull_request.merged == true && github.event.pull_request.head.ref == 'dev'
+  minify-css:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout the repository
+    - name: Checkout repository
       uses: actions/checkout@v3
 
     - name: Set up Node.js
@@ -24,18 +21,13 @@ jobs:
     - name: Install CSS minifier
       run: npm install -g csso-cli
 
-    - name: Minify style.css
-      run: csso dist/style.css --output style.min.css
+    - name: Minify CSS file
+      run: csso dist/style.css --output dist/style.min.css
 
-    - name: Clean up all files except style.min.css
-      run: |
-        rm -rf *
-        mv style.min.css .
-
-    - name: Commit and push only style.min.css to main
+    - name: Commit minified CSS
       run: |
         git config --global user.name "github-actions[bot]"
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
-        git add style.min.css
-        git commit -m "Deploy minified style.css to main"
-        git push origin HEAD:main --force
+        git add dist/style.min.css
+        git commit -m "Add minified CSS file"
+        git push
