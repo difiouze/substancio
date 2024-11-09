@@ -1,0 +1,14 @@
+{
+  "name": "substancio",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "sass --watch src/index.scss dist/style.css"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "sass": "^1.80.6"
+  }
+}
