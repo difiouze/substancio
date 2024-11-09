@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "sass --watch src/index.scss dist/style.css"
+    "watch": "sass --watch src/index.scss dist/style.css",
+    "build:minify": "sass src/index.scss dist/style.min.css --style compressed"
   },
   "author": "",
   "license": "ISC",
